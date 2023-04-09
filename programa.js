@@ -71,7 +71,7 @@ function validarDatos(num1, num2) {
 }
 
 async function realizarOperacion(num1, num2, operacion) {
-    const respuesta = await fetch(`http://localhost:3000/api/${operacion}`, {
+    const respuesta = await fetch(`https://api-calculadora-backend-production.up.railway.app/api/${operacion}`, {
         'method': 'POST',
         'headers': {
             'Content-Type': 'application/json'
