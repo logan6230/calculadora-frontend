@@ -16,7 +16,7 @@ btnSumar.addEventListener(
         const num2 = parseInt(document.getElementById("num2").value);
         const operacion = 'sumar'
         if (!validarDatos(num1, num2)) { return }
-        realizarOperacion(num1, num2,operacion)
+        realizarOperacion(num1, num2, operacion)
 
     });
 
@@ -28,7 +28,7 @@ btnRestar.addEventListener(
         const num2 = parseInt(document.getElementById("num2").value);
         const operacion = 'restar'
         if (!validarDatos(num1, num2)) { return }
-        realizarOperacion(num1, num2,operacion)
+        realizarOperacion(num1, num2, operacion)
     });
 btnMultiplicar.addEventListener(
     'click',
@@ -38,7 +38,7 @@ btnMultiplicar.addEventListener(
         const num2 = parseInt(document.getElementById("num2").value);
         const operacion = 'multiplicar'
         if (!validarDatos(num1, num2)) { return }
-        realizarOperacion(num1, num2,operacion)
+        realizarOperacion(num1, num2, operacion)
     });
 btnDividir.addEventListener(
     'click',
@@ -46,9 +46,14 @@ btnDividir.addEventListener(
         event.preventDefault();
         const num1 = parseInt(document.getElementById("num1").value);
         const num2 = parseInt(document.getElementById("num2").value);
+        if (num2 === 0) {
+            const div_resultado = document.getElementById("resultado");
+            div_resultado.innerHTML = `<div class="alert alert-danger"> No se puede divir entre 0!</div>`;
+            return
+        }
         const operacion = 'dividir'
         if (!validarDatos(num1, num2)) { return }
-        realizarOperacion(num1, num2,operacion)
+        realizarOperacion(num1, num2, operacion)
     });
 btnBorrar.addEventListener(
     'click',
@@ -65,7 +70,7 @@ function validarDatos(num1, num2) {
 
 }
 
-async function realizarOperacion(num1, num2,operacion) {
+async function realizarOperacion(num1, num2, operacion) {
     const respuesta = await fetch(`http://localhost:3000/api/${operacion}`, {
         'method': 'POST',
         'headers': {
